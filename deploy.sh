@@ -2,7 +2,6 @@
 
 # Maritime Infrastructure Deployment Script
 # Maintainer: maskedbooby
-# Purpose: Deploy monitoring container for marine telemetry systems
 
 echo "[*] Starting deployment process..."
 
@@ -13,11 +12,11 @@ PORT=8080
 echo "[*] Pulling latest container image..."
 docker pull $IMAGE_NAME
 
-echo "[*] Stopping existing container if running..."
+echo "[*] Cleaning up old container..."
 docker stop $APP_NAME 2>/dev/null
 docker rm $APP_NAME 2>/dev/null
 
-echo "[*] Starting new container instance..."
+echo "[*] Launching new container..."
 
 docker run -d \
   --name $APP_NAME \
@@ -27,5 +26,4 @@ docker run -d \
   $IMAGE_NAME
 
 echo "[+] Deployment completed successfully."
-
-echo "[*] Monitoring service available on port $PORT"
+echo "[*] Logs available via: docker logs $APP_NAME"
